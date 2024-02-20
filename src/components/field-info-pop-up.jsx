@@ -18,10 +18,9 @@ function FieldInfoPopUp({ open, handleClose, setFieldData, hasOptions }) {
           event.preventDefault();
           const formData = new FormData(event.currentTarget);
           const formJson = Object.fromEntries(formData.entries());
-          console.log("form", formJson);
-          const data = {};
-          data.label = formJson.label;
-          if (hasOptions) data.options = formJson.options.split(",");
+          let data = { label: formJson.label, value: "" };
+          if (hasOptions)
+            data = { ...data, options: formJson.options.split(",") };
           setFieldData(data);
           handleClose();
         },

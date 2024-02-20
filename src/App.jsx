@@ -1,9 +1,16 @@
+import { Route, Routes } from "react-router-dom";
 import FormGenerator from "./components/form-generator";
+import Layout from "./components/Layout";
+import DisplayForm from "./components/display-form";
 
 function App() {
   return (
     <div>
-      <FormGenerator />
+      <Routes>
+        <Route path="/" element={<Layout />} />
+        <Route path="/create-form" element={<FormGenerator />} />
+        <Route path="/view-form" element={<DisplayForm />} />
+      </Routes>
     </div>
   );
 }

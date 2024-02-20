@@ -1,9 +1,11 @@
 import {
+  Button,
   Checkbox,
   FormControl,
   FormControlLabel,
   FormLabel,
   Grid,
+  IconButton,
   InputLabel,
   MenuItem,
   Radio,
@@ -12,7 +14,9 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteField } from "../store/formSlice";
 
 const FormSelect = ({ label, options }) => {
   const [value, setValue] = useState("");
@@ -79,18 +83,121 @@ const FormRadioButton = ({ label, options }) => {
   );
 };
 
-const RenderField = ({ fieldType, label, options }) => {
+const RenderField = ({ fieldType, label, options, idx }) => {
+  const dispatch = useDispatch();
+  const formFields = useSelector((state) => state.form.formData);
+
   switch (fieldType) {
     case "textfield":
-      return <FormTextField label={label} />;
+      return (
+        <Grid
+          item
+          xs={4}
+          display="flex"
+          justifyContent="space-around"
+          alignItems="center"
+        >
+          <FormTextField label={label} />
+          <IconButton
+            onClick={() => {
+              let newFormFields = formFields.filter(
+                (val, crr_idx) => crr_idx !== idx
+              );
+              dispatch(deleteField(newFormFields));
+            }}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Grid>
+      );
     case "textarea":
-      return <FormTextArea label={label} />;
+      return (
+        <Grid
+          item
+          xs={10}
+          display="flex"
+          justifyContent="space-around"
+          alignItems="center"
+        >
+          <FormTextArea label={label} />
+          <IconButton
+            onClick={() => {
+              let newFormFields = formFields.filter(
+                (val, crr_idx) => crr_idx !== idx
+              );
+              dispatch(deleteField(newFormFields));
+            }}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Grid>
+      );
     case "dropdown":
-      return <FormSelect label={label} options={options} />;
+      return (
+        <Grid
+          item
+          xs={4}
+          display="flex"
+          justifyContent="space-around"
+          alignItems="center"
+        >
+          <FormSelect label={label} options={options} />
+          <IconButton
+            onClick={() => {
+              let newFormFields = formFields.filter(
+                (val, crr_idx) => crr_idx !== idx
+              );
+              dispatch(deleteField(newFormFields));
+            }}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Grid>
+      );
     case "checkbox":
-      return <FormCheckBox label={label} />;
+      return (
+        <Grid
+          item
+          xs={4}
+          display="flex"
+          justifyContent="space-around"
+          alignItems="center"
+        >
+          <FormCheckBox label={label} />
+          <IconButton
+            onClick={() => {
+              let newFormFields = formFields.filter(
+                (val, crr_idx) => crr_idx !== idx
+              );
+              dispatch(deleteField(newFormFields));
+            }}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Grid>
+      );
     case "radio-button":
-      return <FormRadioButton label={label} options={options} />;
+      return (
+        <Grid
+          item
+          xs={4}
+          display="flex"
+          justifyContent="space-around"
+          alignItems="center"
+        >
+          <FormRadioButton label={label} options={options} />
+          <IconButton
+            onClick={() => {
+              let newFormFields = formFields.filter(
+                (val, crr_idx) => crr_idx !== idx
+              );
+              dispatch(deleteField(newFormFields));
+            }}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Grid>
+      );
 
     default:
       return null;
@@ -105,14 +212,13 @@ function Form() {
   return (
     <Grid item xs={10}>
       <Grid container gap={3}>
-        {formFields.map((val) => (
-          <Grid item xs={val.fieldType === "textarea" ? 10 : 4}>
-            <RenderField
-              fieldType={val.fieldType}
-              label={val.label}
-              options={val.options ? val.options : null}
-            />
-          </Grid>
+        {formFields.map((val, idx) => (
+          <RenderField
+            fieldType={val.fieldType}
+            label={val.label}
+            options={val.options ? val.options : null}
+            idx={idx}
+          />
         ))}
       </Grid>
     </Grid>
