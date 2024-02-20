@@ -3,16 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const formSlice = createSlice({
   name: "form",
   initialState: {
-    count: 0,
+    formData: [],
   },
 
   reducers: {
-    increaseCounter: (state, action) => {
-      state.count += 1;
+    addFormData: (state, action) => {
+      state.formData.push(action.payload);
     },
   },
 });
 
-export default counterSlice.reducer;
+export default formSlice.reducer;
 
-export const { increaseCounter } = counterSlice.actions;
+export const { addFormData } = formSlice.actions;

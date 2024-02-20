@@ -5,7 +5,7 @@ import Form from "./form";
 
 function FormGenerator() {
   return (
-    <Grid container direction="row">
+    <Grid container direction="row" margin={3}>
       <ButtonPanel />
       <Form />
     </Grid>
