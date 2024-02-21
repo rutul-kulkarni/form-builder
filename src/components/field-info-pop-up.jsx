@@ -6,8 +6,15 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Checkbox, FormControlLabel } from "@mui/material";
 
 function FieldInfoPopUp({ open, handleClose, setFieldData, hasOptions }) {
+  const [isRequired, setIsRequired] = React.useState(false);
+
+  const handleChange = (event) => {
+    setIsRequired(event.target.checked);
+  };
+
   return (
     <Dialog
       open={open}
@@ -18,7 +25,7 @@ function FieldInfoPopUp({ open, handleClose, setFieldData, hasOptions }) {
           event.preventDefault();
           const formData = new FormData(event.currentTarget);
           const formJson = Object.fromEntries(formData.entries());
-          let data = { label: formJson.label, value: "" };
+          let data = { label: formJson.label, value: "", isRequired };
           if (hasOptions)
             data = { ...data, options: formJson.options.split(",") };
           setFieldData(data);
@@ -49,6 +56,11 @@ function FieldInfoPopUp({ open, handleClose, setFieldData, hasOptions }) {
             variant="standard"
           />
         )}
+
+        <FormControlLabel
+          label="Required"
+          control={<Checkbox checked={isRequired} onChange={handleChange} />}
+        />
       </DialogContent>
       <DialogActions>
         <Button type="submit">Add</Button>

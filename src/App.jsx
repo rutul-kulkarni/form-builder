@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import FormGenerator from "./components/form-generator";
 import Layout from "./components/Layout";
 import DisplayForm from "./components/display-form";
+import BackToHome from "./components/back";
 
 function App() {
   return (

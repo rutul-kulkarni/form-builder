@@ -87,6 +87,11 @@ const RenderField = ({ fieldType, label, options, idx }) => {
   const dispatch = useDispatch();
   const formFields = useSelector((state) => state.form.formData);
 
+  const handleDelete = () => {
+    let newFormFields = formFields.filter((val, crr_idx) => crr_idx !== idx);
+    dispatch(deleteField(newFormFields));
+  };
+
   switch (fieldType) {
     case "textfield":
       return (
@@ -98,14 +103,7 @@ const RenderField = ({ fieldType, label, options, idx }) => {
           alignItems="center"
         >
           <FormTextField label={label} />
-          <IconButton
-            onClick={() => {
-              let newFormFields = formFields.filter(
-                (val, crr_idx) => crr_idx !== idx
-              );
-              dispatch(deleteField(newFormFields));
-            }}
-          >
+          <IconButton onClick={handleDelete}>
             <DeleteIcon />
           </IconButton>
         </Grid>
@@ -121,12 +119,7 @@ const RenderField = ({ fieldType, label, options, idx }) => {
         >
           <FormTextArea label={label} />
           <IconButton
-            onClick={() => {
-              let newFormFields = formFields.filter(
-                (val, crr_idx) => crr_idx !== idx
-              );
-              dispatch(deleteField(newFormFields));
-            }}
+            onClick={handleDelete}
           >
             <DeleteIcon />
           </IconButton>
@@ -143,12 +136,7 @@ const RenderField = ({ fieldType, label, options, idx }) => {
         >
           <FormSelect label={label} options={options} />
           <IconButton
-            onClick={() => {
-              let newFormFields = formFields.filter(
-                (val, crr_idx) => crr_idx !== idx
-              );
-              dispatch(deleteField(newFormFields));
-            }}
+            onClick={handleDelete}
           >
             <DeleteIcon />
           </IconButton>
@@ -165,12 +153,7 @@ const RenderField = ({ fieldType, label, options, idx }) => {
         >
           <FormCheckBox label={label} />
           <IconButton
-            onClick={() => {
-              let newFormFields = formFields.filter(
-                (val, crr_idx) => crr_idx !== idx
-              );
-              dispatch(deleteField(newFormFields));
-            }}
+            onClick={handleDelete}
           >
             <DeleteIcon />
           </IconButton>
@@ -187,12 +170,7 @@ const RenderField = ({ fieldType, label, options, idx }) => {
         >
           <FormRadioButton label={label} options={options} />
           <IconButton
-            onClick={() => {
-              let newFormFields = formFields.filter(
-                (val, crr_idx) => crr_idx !== idx
-              );
-              dispatch(deleteField(newFormFields));
-            }}
+            onClick={handleDelete}
           >
             <DeleteIcon />
           </IconButton>
