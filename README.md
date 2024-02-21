@@ -1,8 +1,19 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Application flow consist of 2 phase.
 
-Currently, two official plugins are available:
+1. Form Creation
+2. Display Form
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I have used Redux as central store to save states.
+
+1. Form Creation
+
+    Create Form --> Add Field --> Add Label --> Give validations like required --> Now the data will store to redux 
+
+
+2. Display Form
+
+    View form --> fetch the redux --> render field based on fieldtype --> show error on submit if validation failed --> log data to console if no error
+
+

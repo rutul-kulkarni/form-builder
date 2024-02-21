@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import RenderField from "./render-field";
 import BackToHome from "./back";
+import { useNavigate } from "react-router-dom";
 
 const DisplayForm = () => {
   const formFields = useSelector((state) => state.form.formData);
   const [formErrors, setFormErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,6 +29,7 @@ const DisplayForm = () => {
         formData[field.label] = field.value;
       });
       console.log("Form submitted:", formData);
+      navigate("/");
     }
   };
 
